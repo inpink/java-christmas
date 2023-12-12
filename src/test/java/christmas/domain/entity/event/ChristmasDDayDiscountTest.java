@@ -3,7 +3,6 @@ package christmas.domain.entity.event;
 import christmas.domain.entity.DateOfVisit;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ChristmasDDayDiscountTest {

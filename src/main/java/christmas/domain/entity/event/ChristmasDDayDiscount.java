@@ -19,11 +19,15 @@ public enum ChristmasDDayDiscount implements Event {
         LocalDate visitDate = date.getDate();
         if (visitDate.getDayOfMonth() >= CONDITIONS.startDateOfMonth
                 && visitDate.getDayOfMonth() <= CONDITIONS.endDateOfMonth) {
-            return DiscountPrice.BASIC.price
-                    + (DiscountPrice.EXTRA_PER_DAY.price * (visitDate.getDayOfMonth() - 1));
+            return calculatePrice(visitDate);
         }
 
         return 0;
+    }
+
+    private static int calculatePrice(LocalDate visitDate) {
+        return DiscountPrice.BASIC.price
+                + (DiscountPrice.EXTRA_PER_DAY.price * (visitDate.getDayOfMonth() - 1));
     }
 
     protected enum DiscountPrice {
