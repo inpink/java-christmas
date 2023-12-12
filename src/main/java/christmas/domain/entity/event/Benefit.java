@@ -25,6 +25,11 @@ public class Benefit {
         discountPrice += price;
     }
 
+    public void merge(Benefit other) {
+        this.discountPrice += other.discountPrice;
+        this.gifts.addAll(other.gifts);
+    }
+
     public int getDiscountPrice() {
         return discountPrice;
     }

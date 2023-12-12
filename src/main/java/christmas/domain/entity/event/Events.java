@@ -2,6 +2,7 @@ package christmas.domain.entity.event;
 
 import christmas.domain.entity.DateOfVisit;
 import christmas.domain.entity.OrderItems;
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Events {
@@ -21,10 +22,14 @@ public enum Events {
         return discountFunction.apply(date, orderItems);
     }
 
-    /*public static Benefit calculateBenefit(DateOfVisit date, OrderItems orderItems) {
+    public static Benefit calculateBenefit(DateOfVisit date, OrderItems orderItems) {
+        Benefit totalBenefit = Benefit.createEmpty();
+        Arrays.stream(Events.values())
+                .map(event -> event.applyDiscount(date, orderItems))
+                .forEach(totalBenefit::merge);
 
+        return totalBenefit;
     }
-*/
 
     protected enum Condition {
         MIN_PRICE(10_000);

@@ -3,6 +3,7 @@ package christmas.controller;
 import static christmas.messages.ErrorMessages.INVALID_DATE;
 
 import christmas.domain.entity.DateOfVisit;
+import christmas.domain.entity.OrderItems;
 import christmas.service.OrderService;
 import christmas.util.InputUtil;
 import christmas.view.InputView;
@@ -22,11 +23,19 @@ public class OrderController {
     }
 
     public void play() {
-        inputValidDateOfVisit();
+        final DateOfVisit date = inputValidDateOfVisit();
+        final OrderItems orderItems = inputValidOrderItems();
+
+        outputBenefits();
     }
 
     private DateOfVisit inputValidDateOfVisit() {
         return InputUtil.retryOnInvalidInput(inputView::inputDateOfVisit,
+                errorMessage -> outputView.outputErrorMessage(INVALID_DATE.getMessage()));
+    }
+
+    private OrderItems inputValidOrderItems() {
+        return InputUtil.retryOnInvalidInput(inputView::inputOrderItems,
                 errorMessage -> outputView.outputErrorMessage(INVALID_DATE.getMessage()));
     }
 }
