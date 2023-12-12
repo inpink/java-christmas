@@ -6,15 +6,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrderItems {
-    private final Map<CategoryItem, Integer> items = new HashMap<>();
+    private final Map<CategoryItem, Integer> items;
 
     private OrderItems() {
+        this.items = new HashMap<>();
+    }
 
+    private OrderItems(Map<CategoryItem, Integer> orderItemsAndCount) {
+        this.items = orderItemsAndCount;
+    }
+
+    public static OrderItems create(Map<CategoryItem, Integer> orderItemsAndCount) {
+        return new OrderItems(orderItemsAndCount);
     }
 
     public static OrderItems createEmpty() {
         return new OrderItems();
     }
+
 
     public void add(CategoryItem categoryItem, int count) {
         validateDuplicate(categoryItem);
