@@ -5,23 +5,26 @@ import java.time.LocalDate;
 
 public enum ChristmasDDayDiscount implements Event {
 
-    CONDITIONS(1, 25);
+    CHRISTMAS_D_DAY_DISCOUNT("크리스마스 디데이 할인", 1, 25);
 
+    private final String description;
     private final int startDateOfMonth;
     private final int endDateOfMonth;
 
-    ChristmasDDayDiscount(int startDateOfMonth, int endDateOfMonth) {
+    ChristmasDDayDiscount(String description, int startDateOfMonth, int endDateOfMonth) {
+        this.description = description;
         this.startDateOfMonth = startDateOfMonth;
         this.endDateOfMonth = endDateOfMonth;
     }
+
 
     public static Benefit calculateDiscount(DateOfVisit date) {
         LocalDate visitDate = date.getDate();
         Benefit benefit = Benefit.createEmpty();
 
-        if (visitDate.getDayOfMonth() >= CONDITIONS.startDateOfMonth
-                && visitDate.getDayOfMonth() <= CONDITIONS.endDateOfMonth) {
-            benefit.add(calculatePrice(visitDate));
+        if (visitDate.getDayOfMonth() >= CHRISTMAS_D_DAY_DISCOUNT.startDateOfMonth
+                && visitDate.getDayOfMonth() <= CHRISTMAS_D_DAY_DISCOUNT.endDateOfMonth) {
+            benefit.add(CHRISTMAS_D_DAY_DISCOUNT,calculatePrice(visitDate));
         }
         return benefit;
     }
@@ -29,6 +32,11 @@ public enum ChristmasDDayDiscount implements Event {
     private static int calculatePrice(LocalDate visitDate) {
         return DiscountPrice.BASIC.price
                 + (DiscountPrice.EXTRA_PER_DAY.price * (visitDate.getDayOfMonth() - 1));
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 
     protected enum DiscountPrice {

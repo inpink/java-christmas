@@ -8,14 +8,18 @@ import christmas.domain.entity.OrderItems;
 import christmas.domain.entity.menu.CategoryItem;
 import java.time.LocalDate;
 
-public enum GiftEvent {
-    CONDITIONS(1, 31, 120_000);
+public enum GiftEvent implements Event {
+    CONDITIONS("증정 이벤트",
+            1, 31,
+            120_000);
 
+    private final String description;
     private final int startDateOfMonth;
     private final int endDateOfMonth;
     private final int minPurchasePrice;
 
-    GiftEvent(int startDateOfMonth, int endDateOfMonth, int minPurchasePrice) {
+    GiftEvent(String description, int startDateOfMonth, int endDateOfMonth, int minPurchasePrice) {
+        this.description = description;
         this.startDateOfMonth = startDateOfMonth;
         this.endDateOfMonth = endDateOfMonth;
         this.minPurchasePrice = minPurchasePrice;
@@ -35,6 +39,11 @@ public enum GiftEvent {
 
     private static CategoryItem calculateGift() {
         return GIFT_ITEM.getCategoryItem();
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 
     protected enum GiftItem {
