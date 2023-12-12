@@ -4,6 +4,7 @@ import static christmas.constants.IntegerConstants.THIS_MONTH;
 import static christmas.constants.IntegerConstants.THIS_YEAR;
 
 import christmas.validation.DateValidator;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class DateOfVisit {
@@ -23,6 +24,10 @@ public class DateOfVisit {
 
     public static DateOfVisit create(int dateOfMonth) {
         return new DateOfVisit(dateOfMonth);
+    }
+
+    public DayOfWeek calculateDayOfWeek() {
+        return date.getDayOfWeek();
     }
 
     public LocalDate getDate() {

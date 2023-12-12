@@ -33,4 +33,8 @@ public class OrderItems {
             ExceptionUtil.throwInvalidValueException();
         }
     }
+
+    public Map<CategoryItem, Integer> getItems() {
+        return items;
+    }
 }
