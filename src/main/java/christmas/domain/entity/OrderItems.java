@@ -18,7 +18,14 @@ public class OrderItems {
 
     public void add(CategoryItem categoryItem, int count) {
         validateDuplicate(categoryItem);
+        validateCount(count);
         items.put(categoryItem, count);
+    }
+
+    private void validateCount(int count) {
+        if (count <= 0) {
+            ExceptionUtil.throwInvalidValueException();
+        }
     }
 
     private void validateDuplicate(CategoryItem categoryItem) {
