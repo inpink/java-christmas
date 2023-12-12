@@ -1,4 +1,4 @@
-package christmas.domain.dto;
+package christmas.domain.mapper;
 
 import christmas.domain.entity.DateOfVisit;
 import christmas.util.StringUtil;

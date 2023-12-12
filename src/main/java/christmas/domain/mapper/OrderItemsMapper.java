@@ -1,4 +1,4 @@
-package christmas.domain.dto;
+package christmas.domain.mapper;
 
 import christmas.domain.entity.menu.Category;
 import christmas.domain.entity.menu.CategoryItem;
