@@ -15,8 +15,11 @@ public class DateOfVisit {
                 THIS_YEAR.getValue(),
                 THIS_MONTH.getValue(),
                 dateOfMonth);
-    }
 
+        this.date = LocalDate.of(THIS_YEAR.getValue(),
+                THIS_MONTH.getValue(),
+                dateOfMonth);
+    }
 
     public static DateOfVisit create(int dateOfMonth) {
         return new DateOfVisit(dateOfMonth);
