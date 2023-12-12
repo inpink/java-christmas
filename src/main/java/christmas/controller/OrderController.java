@@ -48,11 +48,11 @@ public class OrderController {
     private void outputResult(Benefit benefit, OrderItems orderItems, Badge badge) {
         outputView.outputTitle();
         outputView.outputOrderItems(orderItems);
-        outputView.outputTotalPriceBeforeDiscount(benefit);
+        outputView.outputTotalPriceBeforeDiscount(orderItems);
         outputView.outputGifts(benefit);
         outputView.outputBenefits(benefit);
         outputView.outputTotalBenefitPrice(benefit);
         outputView.outputEstimatedPriceAfterDiscount(orderItems, benefit);
-        outputView.outputBADGE(badge);
+        outputView.outputBadge(badge);
     }
 }

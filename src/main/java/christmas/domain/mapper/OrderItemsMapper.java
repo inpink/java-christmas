@@ -23,7 +23,10 @@ public class OrderItemsMapper {
     }
 
     private static void addItem(String item, Map<CategoryItem, Integer> orderItems) {
+        item = StringUtil.removeAllSpaces(item);
         String[] itemAndCount = item.split("-");
+        validateSize(itemAndCount);
+
         String itemName = itemAndCount[0];
         String count = itemAndCount[1];
         CategoryItem categoryItem = Category.find(itemName);
@@ -34,6 +37,12 @@ public class OrderItemsMapper {
         int validCount = Integer.parseInt(count);
         validateCount(validCount);
         orderItems.put(categoryItem, validCount);
+    }
+
+    private static void validateSize(String[] itemAndCount) {
+        if (itemAndCount.length!=2) {
+            ExceptionUtil.throwInvalidValueException();
+        }
     }
 
     private static void validateDuplicate(Map<CategoryItem, Integer> orderItems, CategoryItem categoryItem) {

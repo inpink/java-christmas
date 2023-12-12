@@ -32,9 +32,9 @@ public class OutputView {
         System.out.println(formatOrderItems(orderItems));
     }
 
-    public void outputTotalPriceBeforeDiscount(Benefit benefit) {
+    public void outputTotalPriceBeforeDiscount(OrderItems orderItems) {
         System.out.println(formatTitle(TOTAL_PRICE_BEFORE_DISCOUNT.getMessage()));
-        System.out.println(formatTotalPrice(benefit) + "원");
+        System.out.println(formatTotalPrice(orderItems) + "원");
     }
 
     public void outputGifts(Benefit benefit) {
@@ -66,7 +66,7 @@ public class OutputView {
         System.out.println(orderItems.calculateTotalPrice() - benefit.calculateRealDiscountPrice());
     }
 
-    public void outputBADGE(Badge badge) {
+    public void outputBadge(Badge badge) {
         System.out.println(formatTitle(BADGE.getMessage()));
         System.out.println(badge.getDescription());
     }
@@ -85,12 +85,12 @@ public class OutputView {
         return orderItems.getItems().entrySet()
                 .stream()
                 .map(entry -> entry.getKey().getName() + " " + entry.getValue() + "개")
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining("\n"));
     }
 
 
-    private static String formatTotalPrice(Benefit benefit) {
-        return StringUtil.formatByThousandSeparator(benefit.calculateFakeDiscountPrice());
+    private static String formatTotalPrice(OrderItems orderItems) {
+        return StringUtil.formatByThousandSeparator(orderItems.calculateTotalPrice());
     }
 
     private String formatTitle(String title) {

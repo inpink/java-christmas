@@ -28,12 +28,9 @@ public class Benefit {
     }
 
     public int calculateFakeDiscountPrice() {
-        int realDiscountPrice = discounts.keySet().stream()
+        return discounts.keySet().stream()
                 .mapToInt(event -> discounts.get(event))
                 .sum();
-
-        int fakeDiscountPrice = getFakeDiscountPrice();
-        return realDiscountPrice + fakeDiscountPrice;
     }
 
     private int getFakeDiscountPrice() {
