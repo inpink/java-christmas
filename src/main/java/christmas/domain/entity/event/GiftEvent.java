@@ -21,16 +21,16 @@ public enum GiftEvent {
         this.minPurchasePrice = minPurchasePrice;
     }
 
-    public static int calculateDiscount(DateOfVisit date, OrderItems orderItems) {
+    public static Benefit calculateDiscount(DateOfVisit date, OrderItems orderItems) {
         LocalDate visitDate = date.getDate();
+        Benefit benefit = Benefit.createEmpty();
 
         if (visitDate.getDayOfMonth() >= CONDITIONS.startDateOfMonth
                 && visitDate.getDayOfMonth() <= CONDITIONS.endDateOfMonth
                 && orderItems.isPriceMoreThan(CONDITIONS.minPurchasePrice)) {
-
-            return calculateGift();
+            benefit.add(calculateGift());
         }
-        return 0;
+        return benefit;
     }
 
     private static CategoryItem calculateGift() {

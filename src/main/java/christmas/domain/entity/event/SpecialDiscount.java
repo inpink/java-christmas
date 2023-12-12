@@ -23,15 +23,16 @@ public enum SpecialDiscount {
         this.starredDate = starredDate;
     }
 
-    public static int calculateDiscount(DateOfVisit date) {
+    public static Benefit calculateDiscount(DateOfVisit date) {
         LocalDate visitDate = date.getDate();
+        Benefit benefit = Benefit.createEmpty();
+
         if (visitDate.getDayOfMonth() >= CONDITIONS.startDateOfMonth
                 && visitDate.getDayOfMonth() <= CONDITIONS.endDateOfMonth
                 && CONDITIONS.starredDate.contains(visitDate)) {
-
-            return calculatePrice();
+            benefit.add(calculatePrice());
         }
-        return 0;
+        return benefit;
     }
 
     private static int calculatePrice() {

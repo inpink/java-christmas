@@ -33,18 +33,18 @@ public enum WeekendDiscount {
         this.items = Arrays.stream(items).toList();
     }
 
-    public static int calculateDiscount(DateOfVisit date, OrderItems orderItems) {
+    public static Benefit calculateDiscount(DateOfVisit date, OrderItems orderItems) {
         LocalDate visitDate = date.getDate();
         DayOfWeek day = date.calculateDayOfWeek();
         Map<CategoryItem, Integer> orderItemsAndCount = orderItems.getItems();
+        Benefit benefit = Benefit.createEmpty();
 
         if (visitDate.getDayOfMonth() >= CONDITIONS.startDateOfMonth
                 && visitDate.getDayOfMonth() <= CONDITIONS.endDateOfMonth
                 && CONDITIONS.days.contains(day)) {
-
-            return calculatePrice(orderItemsAndCount);
+            benefit.add(calculatePrice(orderItemsAndCount));
         }
-        return 0;
+        return benefit;
     }
 
     private static int calculatePrice(Map<CategoryItem, Integer> orderItemsAndCount) {

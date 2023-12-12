@@ -15,14 +15,15 @@ public enum ChristmasDDayDiscount implements Event {
         this.endDateOfMonth = endDateOfMonth;
     }
 
-    public static int calculateDiscount(DateOfVisit date) {
+    public static Benefit calculateDiscount(DateOfVisit date) {
         LocalDate visitDate = date.getDate();
+        Benefit benefit = Benefit.createEmpty();
+
         if (visitDate.getDayOfMonth() >= CONDITIONS.startDateOfMonth
                 && visitDate.getDayOfMonth() <= CONDITIONS.endDateOfMonth) {
-            return calculatePrice(visitDate);
+            benefit.add(calculatePrice(visitDate));
         }
-
-        return 0;
+        return benefit;
     }
 
     private static int calculatePrice(LocalDate visitDate) {

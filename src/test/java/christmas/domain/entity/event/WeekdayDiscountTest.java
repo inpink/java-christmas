@@ -29,7 +29,7 @@ class WeekdayDiscountTest {
         final OrderItems orderItems = OrderItems.create(orderItemsAndCount);
 
         // When
-        final int discount = WeekdayDiscount.calculateDiscount(date, orderItems);
+        final int discount = WeekdayDiscount.calculateDiscount(date, orderItems).getDiscountPrice();
 
         // Then
         assertEquals(expectedDiscount, discount);
@@ -50,7 +50,7 @@ class WeekdayDiscountTest {
 
 
         // When
-        final int discount = WeekdayDiscount.calculateDiscount(date, orderItems);
+        final int discount = WeekdayDiscount.calculateDiscount(date, orderItems).getDiscountPrice();
 
         // Then
         assertEquals(expectedDiscount, discount);
