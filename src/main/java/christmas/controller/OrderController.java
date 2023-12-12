@@ -22,7 +22,7 @@ public class OrderController {
     }
 
     public void play() {
-
+        inputValidDateOfVisit();
     }
 
     private DateOfVisit inputValidDateOfVisit() {
