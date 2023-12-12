@@ -2,6 +2,8 @@ package christmas.constants;
 
 public enum IntegerConstants {
 
+    THIS_YEAR(2023),
+
     THIS_MONTH(12);
 
     private final int value;
