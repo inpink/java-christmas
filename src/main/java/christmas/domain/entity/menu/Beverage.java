@@ -1,5 +1,7 @@
 package christmas.domain.entity.menu;
 
+import java.util.Arrays;
+
 public enum Beverage implements CategoryItem {
     ZERO_COLA("제로콜라", 3000),
     RED_WINE("레드와인", 60000),
@@ -13,16 +15,16 @@ public enum Beverage implements CategoryItem {
         this.price = price;
     }
 
+    public static boolean containsItem(CategoryItem item) {
+        return Arrays.stream(Beverage.values())
+                .anyMatch(categoryItem -> categoryItem.equals(item));
+    }
+
     public String getName() {
         return name;
     }
 
     public int getPrice() {
         return price;
-    }
-
-    @Override
-    public String toString() {
-        return name + "(" + price + "원)";
     }
 }

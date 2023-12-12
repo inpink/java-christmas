@@ -11,16 +11,20 @@ public enum Events {
     SPECIAL_DISCOUNT((date, orderItems) -> SpecialDiscount.calculateDiscount(date)),
     GIFT_EVENT((date, orderItems) -> GiftEvent.calculateDiscount(date, orderItems));
 
-    private final BiFunction<DateOfVisit, OrderItems, Integer> discountFunction;
+    private final BiFunction<DateOfVisit, OrderItems, Benefit> discountFunction;
 
-    Events(BiFunction<DateOfVisit, OrderItems, Integer> discountFunction) {
+    Events(BiFunction<DateOfVisit, OrderItems, Benefit> discountFunction) {
         this.discountFunction = discountFunction;
     }
 
-    public int applyDiscount(DateOfVisit date, OrderItems orderItems) {
+    public Benefit applyDiscount(DateOfVisit date, OrderItems orderItems) {
         return discountFunction.apply(date, orderItems);
     }
 
+    /*public static Benefit calculateBenefit(DateOfVisit date, OrderItems orderItems) {
+
+    }
+*/
 
     protected enum Condition {
         MIN_PRICE(10_000);

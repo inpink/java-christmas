@@ -12,9 +12,9 @@ public class OrderItems {
     private final Map<CategoryItem, Integer> items;
 
     private OrderItems(Map<CategoryItem, Integer> orderItemsAndCount) {
+        this.items = orderItemsAndCount;
         validateNotOnlyBeverage();
         validateNotOverCount();
-        this.items = orderItemsAndCount;
     }
 
     public static OrderItems create(Map<CategoryItem, Integer> orderItemsAndCount) {
@@ -40,6 +40,10 @@ public class OrderItems {
     private void validateNotOnlyBeverage() {
         boolean isOnlyBeverage = items.keySet().stream()
                 .allMatch(item -> Beverage.containsItem(item));
+
+        if (isOnlyBeverage) {
+            ExceptionUtil.throwInvalidValueException();
+        }
     }
 
     private void validateNotOverCount() {

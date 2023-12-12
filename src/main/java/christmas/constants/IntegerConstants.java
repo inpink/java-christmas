@@ -4,7 +4,8 @@ public enum IntegerConstants {
 
     THIS_YEAR(2023),
 
-    THIS_MONTH(12);
+    THIS_MONTH(12),
+    MAX_ORDER_COUNT(20);
 
     private final int value;
 

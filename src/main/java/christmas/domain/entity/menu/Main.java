@@ -22,9 +22,5 @@ public enum Main implements CategoryItem {
         return price;
     }
 
-    @Override
-    public String toString() {
-        return name + "(" + price + "원)";
-    }
 }
 

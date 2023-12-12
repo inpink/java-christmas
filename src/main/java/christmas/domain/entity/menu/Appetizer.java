@@ -21,8 +21,4 @@ public enum Appetizer implements CategoryItem {
         return price;
     }
 
-    @Override
-    public String toString() {
-        return name + "(" + price + "원)";
-    }
 }

@@ -1,45 +1,44 @@
 package christmas.domain.entity;
 
-import christmas.domain.entity.menu.CategoryItem;
 import christmas.domain.entity.menu.Appetizer;
+import christmas.domain.entity.menu.Beverage;
+import christmas.domain.entity.menu.CategoryItem;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
+import java.util.Map;
 import java.util.stream.Stream;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class OrderItemsTest {
 
-    @ParameterizedTest
-    @MethodSource("categoryItemProvider")
-    @DisplayName("동일한 CategoryItem을 두 번 추가할 경우 예외 발생")
-    void 동일한_CategoryItem을_두_번_추가할_경우_예외_발생(final CategoryItem categoryItem) {
+    @Test
+    @DisplayName("주문 항목이 오직 음료만 있을 경우 예외 발생")
+    void 주문_항목이_오직_음료만_있을_경우_예외_발생() {
         // Given
-        final OrderItems orderItems = OrderItems.createEmpty();
-
-        // When
-        orderItems.add(categoryItem, 1);
-
-        // Then
-        assertThrows(Exception.class, () -> orderItems.add(categoryItem, 1));
-    }
-
-    private static Stream<CategoryItem> categoryItemProvider() {
-        return Stream.of(Appetizer.values());
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {0, -1, -10})
-    @DisplayName("부적절한 개수(0 이하)로 CategoryItem 추가할 경우 예외 발생")
-    void 부적절한_개수로_CategoryItem_추가할_경우_예외_발생(final int invalidCount) {
-        // Given
-        final OrderItems orderItems = OrderItems.createEmpty();
-        final CategoryItem categoryItem = Appetizer.MUSHROOM_SOUP;
+        Map<CategoryItem, Integer> onlyBeverages = Map.of(
+                Beverage.ZERO_COLA, 2,
+                Beverage.RED_WINE, 1
+        );
 
         // When - Then
-        assertThrows(Exception.class, () -> orderItems.add(categoryItem, invalidCount));
+        assertThrows(IllegalArgumentException.class, () -> OrderItems.create(onlyBeverages));
+    }
+
+    @Test
+    @DisplayName("주문 항목에 음료와 다른 항목이 포함된 경우 정상 생성")
+    void 주문_항목에_음료와_다른_항목이_포함된_경우_정상_생성() {
+        // Given
+        Map<CategoryItem, Integer> mixedItems = Map.of(
+                Appetizer.MUSHROOM_SOUP, 1,
+                Beverage.CHAMPAGNE, 1
+        );
+
+        // When
+        OrderItems orderItems = OrderItems.create(mixedItems);
+
+        // Then
+        assertNotNull(orderItems);
     }
 }
