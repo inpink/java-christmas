@@ -31,6 +31,16 @@ public class OrderItems {
         items.put(categoryItem, count);
     }
 
+    public int calculateTotalPrice() {
+        return items.keySet().stream()
+                .mapToInt(item -> item.getPrice() * items.get(item))
+                .sum();
+    }
+
+    public boolean isPriceMoreThan(int minPurchasePrice) {
+        return calculateTotalPrice() >= minPurchasePrice;
+    }
+
     private void validateCount(int count) {
         if (count <= 0) {
             ExceptionUtil.throwInvalidValueException();
@@ -46,4 +56,5 @@ public class OrderItems {
     public Map<CategoryItem, Integer> getItems() {
         return items;
     }
+
 }
