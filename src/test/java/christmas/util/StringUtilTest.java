@@ -22,4 +22,19 @@ public class StringUtilTest {
         assertThat(StringUtil.removeAllSpaces(result)).isEqualTo(expected);
     }
 
+    @ParameterizedTest(name = "정수 {0}는 천단위 구분자 문자열로 {1}다.")
+    @CsvSource({
+            "'1000', '1,000'",
+            "'1000000', '1,000,000'",
+            "'123456789', '123,456,789'",
+            "'0', '0'"
+    })
+    void 천단위_구분자_문자열_생성(final int number, final String expected) {
+        // When
+        final String result = StringUtil.formatByThousandSeparator(number);
+
+        // Then
+        assertThat(result).isEqualTo(expected);
+    }
+
 }
