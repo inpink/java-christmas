@@ -22,5 +22,7 @@ public class DateOfVisit {
         return new DateOfVisit(dateOfMonth);
     }
 
-
+    public LocalDate getDate() {
+        return date;
+    }
 }
