@@ -21,7 +21,7 @@ class ChristmasDDayDiscountTest {
         final DateOfVisit date = DateOfVisit.create(visitDate);
 
         // When
-        final int discount = ChristmasDDayDiscount.calculateDiscount(date).calculateDiscountPrice();
+        final int discount = ChristmasDDayDiscount.calculateDiscount(date).calculateFakeDiscountPrice();
 
         // Then
         assertEquals(expectedDiscount, discount);

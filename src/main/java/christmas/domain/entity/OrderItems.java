@@ -5,7 +5,6 @@ import static christmas.constants.IntegerConstants.MAX_ORDER_COUNT;
 import christmas.domain.entity.menu.Beverage;
 import christmas.domain.entity.menu.CategoryItem;
 import christmas.util.ExceptionUtil;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OrderItems {

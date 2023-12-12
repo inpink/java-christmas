@@ -18,7 +18,7 @@ class SpecialDiscountTest {
         final DateOfVisit date = DateOfVisit.create(visitDate);
 
         // When
-        final int discount = SpecialDiscount.calculateDiscount(date).calculateDiscountPrice();
+        final int discount = SpecialDiscount.calculateDiscount(date).calculateFakeDiscountPrice();
 
         // Then
         assertEquals(expectedDiscount, discount);

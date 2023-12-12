@@ -8,16 +8,21 @@ import christmas.domain.entity.Starred;
 import java.time.LocalDate;
 import java.util.List;
 
-public enum SpecialDiscount {
-    CONDITIONS(1, 31, Starred.getStarredDate());
+public enum SpecialDiscount implements Event {
+    SPECIAL_DISCOUNT("특별 할인",
+            1, 31,
+            Starred.getStarredDate());
 
+    private final String description;
     private final int startDateOfMonth;
     private final int endDateOfMonth;
     private final List<LocalDate> starredDate;
 
-    SpecialDiscount(int startDateOfMonth,
+    SpecialDiscount(String description,
+                    int startDateOfMonth,
                     int endDateOfMonth,
                     List<LocalDate> starredDate) {
+        this.description = description;
         this.startDateOfMonth = startDateOfMonth;
         this.endDateOfMonth = endDateOfMonth;
         this.starredDate = starredDate;
@@ -27,16 +32,21 @@ public enum SpecialDiscount {
         LocalDate visitDate = date.getDate();
         Benefit benefit = Benefit.createEmpty();
 
-        if (visitDate.getDayOfMonth() >= CONDITIONS.startDateOfMonth
-                && visitDate.getDayOfMonth() <= CONDITIONS.endDateOfMonth
-                && CONDITIONS.starredDate.contains(visitDate)) {
-            benefit.add(calculatePrice());
+        if (visitDate.getDayOfMonth() >= SPECIAL_DISCOUNT.startDateOfMonth
+                && visitDate.getDayOfMonth() <= SPECIAL_DISCOUNT.endDateOfMonth
+                && SPECIAL_DISCOUNT.starredDate.contains(visitDate)) {
+            benefit.add(SPECIAL_DISCOUNT, calculatePrice());
         }
         return benefit;
     }
 
     private static int calculatePrice() {
         return BASIC.price;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 
     protected enum DiscountPrice {

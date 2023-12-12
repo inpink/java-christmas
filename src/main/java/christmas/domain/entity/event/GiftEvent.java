@@ -9,7 +9,7 @@ import christmas.domain.entity.menu.CategoryItem;
 import java.time.LocalDate;
 
 public enum GiftEvent implements Event {
-    CONDITIONS("증정 이벤트",
+    GIFT_EVENT("증정 이벤트",
             1, 31,
             120_000);
 
@@ -29,10 +29,11 @@ public enum GiftEvent implements Event {
         LocalDate visitDate = date.getDate();
         Benefit benefit = Benefit.createEmpty();
 
-        if (visitDate.getDayOfMonth() >= CONDITIONS.startDateOfMonth
-                && visitDate.getDayOfMonth() <= CONDITIONS.endDateOfMonth
-                && orderItems.isPriceMoreThan(CONDITIONS.minPurchasePrice)) {
+        if (visitDate.getDayOfMonth() >= GIFT_EVENT.startDateOfMonth
+                && visitDate.getDayOfMonth() <= GIFT_EVENT.endDateOfMonth
+                && orderItems.isPriceMoreThan(GIFT_EVENT.minPurchasePrice)) {
             benefit.add(calculateGift());
+            benefit.add(GIFT_EVENT, calculateGift().getPrice());
         }
         return benefit;
     }
